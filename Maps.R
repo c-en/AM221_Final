@@ -1,10 +1,15 @@
 library(rgdal)
 
+# Set working directory
+setwd("~/Applied Math 221/Final Project/AM221_Final-master/Maps") # Change this to match your computer
+
+# Save plot as PDF
+pdf('District_Map.pdf')
+
 # Citation: https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf
 # Read in shape file (from https://docs.digital.mass.gov/dataset/massgis-data-community-boundaries-towns-survey-points)
-setwd("~/Applied Math 221/Final Project/AM221_Final-master/Maps") # Change this to match your computer
 require(rgdal)
-shape <- readOGR(dsn=".",layer = "TOWNSSURVEY_POLY") # Make sure this file is in your working directory
+shape <- readOGR(dsn=".",layer = "TOWNSSURVEY_POLY") # Make sure this set of files is in your working directory
 plot(shape)
 
 # Color town of Sheffield red (as a test). Should be near bottom left corner
@@ -435,7 +440,7 @@ for (i in 1:length(d9))
   plot(shape[current_town,], col = "turquoise", add = TRUE)
 }
 
-# Print legend for colors
+# Show legend for colors
 # https://www.math.ucla.edu/~anderson/rw1001/library/base/html/legend.html
 # https://stackoverflow.com/questions/14883238/adding-simple-legend-to-plot-in-r
 legend('bottomleft',legend=c('District 1','District 2','District 3','District 4','District 5',
@@ -443,3 +448,5 @@ legend('bottomleft',legend=c('District 1','District 2','District 3','District 4'
        fill=c('blue','green','red','yellow',
       'pink','orange','white','purple','turquoise'), ncol=3, bty = "o",cex=0.8)
 
+# Need this to save plot in PDF properly
+dev.off()
